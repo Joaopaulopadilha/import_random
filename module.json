@@ -1,0 +1,70 @@
+{
+  "name": "random",
+  "version": "1.0.0",
+  "description": "Simple random number generation for JP language",
+  "author": "Joaopaulopadilha",
+  "license": "MIT",
+  
+  "includes": [
+    "<random>",
+    "<chrono>"
+  ],
+  
+  "custom_code": "// Random number generator setup\nstatic std::random_device rd;\nstatic std::mt19937 gen(rd());\n\n// Random integer between min and max (inclusive)\nint jp_rand_int(int min, int max) {\n    std::uniform_int_distribution<int> dis(min, max);\n    return dis(gen);\n}\n\n// Random float between min and max\ndouble jp_rand_float(double min, double max) {\n    std::uniform_real_distribution<double> dis(min, max);\n    return dis(gen);\n}\n\n// Random boolean with given probability (0.0 to 1.0)\nbool jp_rand_bool(double probability = 0.5) {\n    std::uniform_real_distribution<double> dis(0.0, 1.0);\n    return dis(gen) < probability;\n}\n\n// Seed the random generator (optional)\nvoid jp_rand_seed(int seed) {\n    gen.seed(seed);\n}",
+  
+  "functions": {
+    "randInt": {
+      "description": "Random integer between min and max (inclusive)",
+      "cpp_name": "jp_rand_int",
+      "params": [
+        {"name": "min", "type": "int", "description": "Minimum value (inclusive)"},
+        {"name": "max", "type": "int", "description": "Maximum value (inclusive)"}
+      ],
+      "return": {
+        "type": "int",
+        "description": "Random integer between min and max"
+      },
+      "example": "dice = randInt(1, 6)  // Random dice roll"
+    },
+    
+    "randFloat": {
+      "description": "Random floating point number between min and max",
+      "cpp_name": "jp_rand_float",
+      "params": [
+        {"name": "min", "type": "double", "description": "Minimum value"},
+        {"name": "max", "type": "double", "description": "Maximum value"}
+      ],
+      "return": {
+        "type": "double",
+        "description": "Random float between min and max"
+      },
+      "example": "chance = randFloat(0.0, 1.0)  // Random probability"
+    },
+    
+    "randBool": {
+      "description": "Random boolean with optional probability",
+      "cpp_name": "jp_rand_bool",
+      "params": [
+        {"name": "probability", "type": "double", "description": "Probability of true (0.0 to 1.0)", "optional": true}
+      ],
+      "return": {
+        "type": "bool",
+        "description": "Random true/false"
+      },
+      "example": "coin = randBool()  // 50/50 chance\nlucky = randBool(0.1)  // 10% chance"
+    },
+    
+    "randSeed": {
+      "description": "Seed the random number generator for reproducible results",
+      "cpp_name": "jp_rand_seed",
+      "params": [
+        {"name": "seed", "type": "int", "description": "Seed value"}
+      ],
+      "return": {
+        "type": "void",
+        "description": "No return value"
+      },
+      "example": "randSeed(12345)  // Set seed for reproducible randomness"
+    }
+  }
+}
