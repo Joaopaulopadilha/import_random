@@ -1,0 +1,98 @@
+// Exemplo completo do módulo random
+
+import random
+
+print("🎲 === JP Random Module Demo ===")
+print()
+
+// Teste básico de números
+print("=== Números Aleatórios ===")
+for i in range(5) {
+    dice = randInt(1, 6)
+    chance = randFloat(0.0, 1.0)
+    print("Dado:", dice, "- Chance:", chance)
+}
+
+print()
+
+// Teste de booleanos
+print("=== Teste de Moedas ===")
+heads = 0
+tails = 0
+
+for i in range(10) {
+    if randBool() {
+        print("🪙 Cara")
+        heads = heads + 1
+    } else {
+        print("🪙 Coroa") 
+        tails = tails + 1
+    }
+}
+
+print("Resultado: Cara =", heads, ", Coroa =", tails)
+print()
+
+// Sistema de eventos raros
+print("=== Sistema de Eventos ===")
+for i in range(20) {
+    if randBool(0.1) {  // 10% chance
+        print("⭐ Evento raro aconteceu!")
+    } else {
+        if randBool(0.3) {  // 30% chance
+            print("🔵 Evento comum")
+        } else {
+            print("⚪ Nada aconteceu")
+        }
+    }
+}
+
+print()
+
+// Simulação de combate
+print("=== Simulação de Combate ===")
+player_hp = 100
+enemy_hp = 80
+
+while player_hp > 0 and enemy_hp > 0 {
+    // Ataque do jogador
+    damage = randInt(15, 25)
+    enemy_hp = enemy_hp - damage
+    print("🗡️ Você causou", damage, "de dano! Inimigo HP:", enemy_hp)
+    
+    if enemy_hp <= 0 {
+        print("🎉 Você venceu!")
+        break
+    }
+    
+    // Ataque do inimigo
+    damage = randInt(10, 20)
+    player_hp = player_hp - damage
+    print("💥 Inimigo causou", damage, "de dano! Seu HP:", player_hp)
+    
+    if player_hp <= 0 {
+        print("💀 Você foi derrotado!")
+        break
+    }
+    
+    print("---")
+}
+
+print()
+
+// Teste com seed (resultados reproduzíveis)
+print("=== Teste com Seed (Reproduzível) ===")
+randSeed(12345)
+print("Sequência 1:")
+for i in range(3) {
+    print("  ", randInt(1, 10))
+}
+
+randSeed(12345)  // Mesmo seed
+print("Sequência 2 (deve ser igual):")
+for i in range(3) {
+    print("  ", randInt(1, 10))
+}
+
+print()
+print("🎲 === Demo Concluída! ===")
